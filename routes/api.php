@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\senderIdsController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +37,41 @@ Route::middleware('auth:sanctum')->get("logoutuser",[userController::class, 'log
 
 
 //ADMIN
-Route::middleware('auth:sanctum')->post("create_user", [userController::class, 'create_user']);
+Route::post("create_user", [userController::class, 'create_user']);
 
 Route::post("register_new_client", [userController::class, 'register_new_client']);
 
 Route::middleware('auth:sanctum')->delete("delete_user",[userController::class, 'delete_user']);
 
 Route::get("list_users",[userController::class, 'list_users']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+****************************************
+            SEMA BACKEND ROUTES
+***************************************/
+Route::post('activate_account',[AccountController::class,'activate_account']);
+
+Route::post('change_account_password',[AccountController::class, 'change_account_password']);
+
+Route::post('fetch_account_api_keys',[AccountController::class, 'fetch_account_api_keys']);
 
 
 

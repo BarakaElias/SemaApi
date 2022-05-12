@@ -24,7 +24,8 @@ class UsersTableSeeder extends Seeder
             'email'=>'baraka@aimfirms.com',
             'phone_number'=>'255624327900',
             'role'=>'Administrator',
-            'company_id'=>'2022',
+            // 'company_id'=>'2022',
+            'isSemaAdmin'=>false,
         ]);
     }
 }

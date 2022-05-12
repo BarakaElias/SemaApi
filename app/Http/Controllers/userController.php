@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\User;
 use Validator;
 
@@ -80,7 +81,7 @@ class userController extends Controller
             "phone_number"=>"max:12|string",
             "password"=>"string",
             "role"=>"IN:Administrator,Helper",
-            "company_id"=>"string|required",
+            // "company_id"=>"string|required",
         );
 
         // $validator = Validator::make($req->all(), $rules);
@@ -101,7 +102,7 @@ class userController extends Controller
             $user->isSemaAdmin = $req->isSemaAdmin;
             $user->role = $req->role;
             $user->password = Hash::make($req->password);
-            $user->company_id = $req->company_id;
+            // $user->company_id = $req->company_id;
 
             $user->save();
             return "User created";
@@ -175,7 +176,10 @@ class userController extends Controller
 
 
     function get_user_by_token(Request $req){
-        return "you reached token";
+        $token = PersonalAccessToken::findToken('hashedtoken');
+
+        $user = $token->tokenable;
+        return $user;
     }
 
 
