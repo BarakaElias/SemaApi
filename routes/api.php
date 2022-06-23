@@ -17,13 +17,58 @@ use App\Http\Controllers\AccountController;
 |
 */
 
+/*
+*************************************************
+        AUTHENTICATION
+************************************************/
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('auth:sanctum')->post('/auth/token_gets_user', [userController::class, 'get_user_by_token']);
 
-Route::post('reset_password',[userController::class, 'reset_password']);
+
+//password reset request
+Route::post('reset_password_request',[userController::class, 'reset_password_request']);
+
+
+
+
+// //routes for email verification
+// //1. Route to display a notice to the user to check email and click the ver link
+// //so that he cannot access some routes
+// Route::get('/email/verify', function(){
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+
+
+//2. route to handle requests generated when user clicks the link in the email
+
+
+
+
+//3. route to resend a verification link if user is a dumbass
+
+Route::post('/email/verification-notification', function(Request $req){
+    $req->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['aut','throttle:6,1'])->name('verification.send');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 ********************************************
@@ -44,6 +89,8 @@ Route::post("register_new_client", [userController::class, 'register_new_client'
 Route::middleware('auth:sanctum')->delete("delete_user",[userController::class, 'delete_user']);
 
 Route::get("list_users",[userController::class, 'list_users']);
+
+Route::post("change_api_keys", [AccountController::class, 'change_api_keys']);
 
 
 
@@ -73,6 +120,8 @@ Route::post('change_account_password',[AccountController::class, 'change_account
 
 Route::post('fetch_account_api_keys',[AccountController::class, 'fetch_account_api_keys']);
 
+Route::post('upload_file',[AccountController::class, 'handleUploadFile']);
+
 
 
 
@@ -96,7 +145,7 @@ Route::post('fetch_account_api_keys',[AccountController::class, 'fetch_account_a
 
 //sender ID
 //get all senders
-Route::middleware('auth:sanctum')->get("/list",[senderIdsController::class, 'getAllSenderIds']);
+Route::get("/list_senders",[senderIdsController::class, 'getAllSenderIds']);
 
 //update a sender ID
 Route::middleware('auth:snactum')->put("list/{id}",[senderIdsController::class, 'updateSenderId']);
@@ -109,11 +158,11 @@ Route::middleware('auth:snactum')->put("list/{id}",[senderIdsController::class, 
 
 //FOR SENDER ID MANAGEMENT
 //Registering a new ID
-Route::middleware('auth:sanctum')->post("register_sender_id",[senderIdsController::class, 'register_sender_id']);
+Route::post("register_sender_id",[senderIdsController::class, 'register_sender_id']);
 
 //updating an aid
-Route::middleware('auth:sanctum')->put("update_sender_id",[senderIdsController::class, 'update_sender_id']);
+Route::put("update_sender_id",[senderIdsController::class, 'update_sender_id']);
 
 //deleting an id
-Route::middleware('auth:sanctum')->delete("delete_sender_id/{id}", [senderIdsController::class, 'delete_sender_id']);
+Route::post("delete_sender_id", [senderIdsController::class, 'delete_sender_id']);
 

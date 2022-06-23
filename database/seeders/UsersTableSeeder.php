@@ -16,16 +16,27 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //
+        // DB::table('users')->insert([
+        //     'first_name'=>'Baraka',
+        //     'last_name'=>'Urio',
+        //     'username'=>'baraka',
+        //     'password'=>Hash::make('LoginPass123'),
+        //     'email'=>'baraka@aimfirms.com',
+        //     'phone_number'=>'255624327900',
+        //     'role'=>'Administrator',
+        //     // 'company_id'=>'2022',
+        //     'isSemaAdmin'=>false,
+        // ]);
+
         DB::table('users')->insert([
-            'first_name'=>'Baraka',
+            'first_name'=>'Isaac',
             'last_name'=>'Urio',
-            'username'=>'baraka',
+            'username'=>'isaac',
             'password'=>Hash::make('LoginPass123'),
-            'email'=>'baraka@aimfirms.com',
+            'email'=>'isaac@aimfirms.com',
             'phone_number'=>'255624327900',
-            'role'=>'Administrator',
-            // 'company_id'=>'2022',
-            'isSemaAdmin'=>false,
+            'isSemaAdmin'=>true,
+            'role'=>'Administrator'
         ]);
     }
 }

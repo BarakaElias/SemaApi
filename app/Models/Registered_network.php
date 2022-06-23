@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Apikey extends Model
+class Registered_network extends Model
 {
     use HasFactory;
-
-
-    public function account(){
-        return $this->hasOne(Account::class);
-    }
 }
