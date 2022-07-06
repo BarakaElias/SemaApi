@@ -12,20 +12,9 @@ use Carbon\Carbon;
 class senderIdsController extends Controller
 {
     //
-    function getAllSenderIds(){
-        // return ["id"=>"1","country"=>"Tanzania","name"=>"Sema","status"=>"Active","registered_networks"=>"list of registered networks"];
-        // $senderIds = DB::select("SELECT * FROM sms_sender_ids");
-        // for($i = 0; $i <= count($senderIds); $i++){
-        //    $iid = $senderIds[$i];
-        //     return json_decode($iid->registered_networks);
-        // }
-       
+    function getAllSenderIds(){       
         $sms_sender_ids = sms_sender_id::all();
         return $sms_sender_ids;
-
-        // return DB::table('sms_sender_ids')->join('registered_networks','sms_sender_ids.id','=','registered_networks.sms_sender_id_id')->get();
-
-        // $reg_nets = DB::select("SELECT * FROM registered_networks WHERE sms_sender_id")
     }
 
 

@@ -42,7 +42,8 @@ class userController extends Controller
         if(!$user->isSemaAdmin){
             $api_keys = Apikey::select('api_secrets')->where('account_id', $user->account_id)->get();
             if($api_keys){
-                $user->api_keys = $api_keys;
+                $user->api_secrets = $api_keys;
+                // $user->api_keys = $api_keys[0]->api_secrets;
             }
             // $api_secrets = $DB::table('apikeys')->select('api_secrets','platform')->where('account_id','=',$user->company_id)->get();
 

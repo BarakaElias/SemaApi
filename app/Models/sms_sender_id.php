@@ -13,6 +13,6 @@ class sms_sender_id extends Model
     // protected $dateFormat = 'U';
 
     protected $casts = [
-        'registered_networks' => "array"
+       'registered_networks' => "array"
     ];
 }
