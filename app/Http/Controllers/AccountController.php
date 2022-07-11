@@ -17,8 +17,6 @@ class AccountController extends Controller
     function activate_account(Request $req){
         $rules = array(
             "email"=>"string|required|unique:accounts",
-            "password"=>"string|required",
-            "user_email"=>"string|required"
         );
 
         $validator = Validator::make($req->all(), $rules);
@@ -32,7 +30,13 @@ class AccountController extends Controller
 
         $account = new Account;
         $account->email = $req->email;
-        $account->password = Hash::make($req->password);
+        // $account->password = Hash::make($req->password);
+        $account->company_name = $req->company_name;
+        $account->company_email = $req->company_email;
+        $account->support_email = $req->support_email;
+        $account->billing_email = $req->billing_email;
+        $account->phone_number = $req->phone_number;
+        $account->status = "Requests Activation";
         $account->save();
 
         //get user and update account id
@@ -108,5 +112,14 @@ class AccountController extends Controller
 
         return "From upload file";
 
+    }
+
+
+
+
+    /* SEMA ADMINS */
+    function fetchAccounts(Request $req){
+        $accounts = Account::all();
+        return $accounts;
     }
 }

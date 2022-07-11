@@ -123,6 +123,9 @@ Route::post('fetch_account_api_keys',[AccountController::class, 'fetch_account_a
 Route::post('upload_file',[AccountController::class, 'handleUploadFile']);
 
 
+Route::get('fetch_accounts',[AccountController::class, 'fetchAccounts']);
+
+
 
 
 
