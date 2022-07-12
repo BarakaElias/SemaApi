@@ -43,17 +43,8 @@ class senderIdsController extends Controller
         $sms_sender_id->name = $req->sender_name;
         $sms_sender_id->status = ($req->status) ? "Active" : "Inactive";
         $sms_sender_id->user = "isaac@aimfirms.com";
+        $sms_sender_id->registered_networks = $req->registered_networks;
         $sms_sender_id->save();
-
-
-        for($index = 0; $index <= count($req->registered_networks); $index++){
-                $registered_network = new Registered_network;
-                $registered_network->network = $req->registered_networks[$index]['network'];
-                $registered_network->registerer = $req->registered_networks[$index]['registerer'];
-                $registered_network->status = ($req->registered_networks[$index]['status']) ? "Active" : "Inactive";
-                $registered_network->sms_sender_id_id = $sms_sender_id->id;
-                $registered_network->save();
-           }
         return "Successfully Registered ID";
     }
 
