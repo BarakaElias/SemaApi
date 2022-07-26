@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 Route::get('/', function () {
+    // dd($this->app['XeroService']->authorize());
     return view('welcome');
 });
 
@@ -28,6 +29,8 @@ Route::get('/reset-password/{token}', function ($token) {
     return view('resetpasswordform', ['token' => $token]);
 });
 
+
+Route::get('/manage/xero', [\App\Http\Controllers\XeroController::class, 'index'])->name('xero.auth.success');
 
 
 

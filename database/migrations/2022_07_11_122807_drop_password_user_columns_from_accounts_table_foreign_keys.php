@@ -13,11 +13,11 @@ class DropPasswordUserColumnsFromAccountsTableForeignKeys extends Migration
      */
     public function up()
     {
-        Schema::table('accounts_table_foreign_keys', function (Blueprint $table) {
-            //
-            $table->dropForeign(['password','user']);
+        // Schema::table('accounts_table_foreign_keys', function (Blueprint $table) {
+        //     //
+        //     $table->dropForeign(['password','user']);
 
-        });
+        // });
     }
 
     /**

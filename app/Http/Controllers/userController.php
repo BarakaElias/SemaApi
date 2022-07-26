@@ -119,6 +119,8 @@ class userController extends Controller
             // $user->company_id = $req->company_id;
 
             $user->save();
+
+         
             return "User created";
         // }
     }
@@ -169,7 +171,12 @@ class userController extends Controller
         // $account = new Accout;
         
 
+        $account = new Account;
+        $account->email = $req->email;
+        $account->status = "Not Activated";
+        $account->save();
 
+        // $the_id = $account->id;
 
 
         $user = new User;
@@ -181,7 +188,7 @@ class userController extends Controller
             $user->isSemaAdmin = false;
             $user->role = "Administrator";
             $user->password = Hash::make($req->password);
-            $user->account_id = "1";
+            $user->account_id = $account->id;
 
         $user->save();
 

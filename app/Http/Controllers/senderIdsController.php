@@ -34,7 +34,6 @@ class senderIdsController extends Controller
         if($validator->fails()){
             return $validator->errors();
         }
-        // return $req->registered_networks;
 
 
         $sms_sender_id = new sms_sender_id;
@@ -64,10 +63,6 @@ class senderIdsController extends Controller
             "name"=>"Alpha|required|string|min:2|max:20",
             "status"=>"required",
         ]);
-        // $validator = Validator::make($req->all(), $rules);
-        // if($validator->fails()){
-        //     return $validator->errors();
-        // }
 
         if($req->status){
             $req->status = "Active";
@@ -84,17 +79,6 @@ class senderIdsController extends Controller
                 'registered_networks'=>json_encode($req->registered_networks, true),
             ]
          );
-
-        //  return json_decode($req->registered_networks);
-    //     for($index = 0; $index <= count($req->registered_networks); $index++){
-    //     //    return $req->registered_networks[$index]['network'];
-    //         $registered_network = new Registered_network;
-    //         $registered_network->network = $req->registered_networks[$index]['network'];
-    //         $registered_network->registerer = $req->registered_networks[$index]['registerer'];
-    //         $registered_network->status = ($req->registered_networks[$index]['status']) ? "Active" : "Inactive";
-    //         $registered_network->sms_sender_id_id = 1;
-    //         $registered_network->save();
-    //    }
         return "Successfully updated {$req->name}";    
     }
 
@@ -105,15 +89,16 @@ class senderIdsController extends Controller
 
 
     function delete_sender_id(Request $req){
-        $rules = array(["id"=>"required"]);
-        $validator = Validator::make($req->all(), $rules);
-        if($validator->fails()){
-            return $validator->errors();
-        }
+        // $rules = array(["id"=>"required"]);
+        // $validator = Validator::make($req->all(), $rules);
+        // if($validator->fails()){
+        //     return $validator->errors();
+        // }
+        // return $req;
 
         // sms_sender_id::destroy((int)$req->id);
 
-        $id_to_delete = DB::table('sms_sender_ids')->find(11115);
+        $id_to_delete = sms_sender_id::find($req->id);
         $id_to_delete->delete();
 
         // $deleted = DB::table('sms_sender_ids')->where('id', '=', 11115)->delete();

@@ -13,6 +13,12 @@ use Validator;
 
 class AccountController extends Controller
 {
+
+    function create_account(Request $req){
+        $rules = array(
+            "email"=>"string|required|unique:accounts",
+        );
+    }
     //
     function activate_account(Request $req){
         $rules = array(
