@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     // dd($this->app['XeroService']->authorize());
+    
     return view('welcome');
 });
 

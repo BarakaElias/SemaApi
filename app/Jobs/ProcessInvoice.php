@@ -9,10 +9,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Account;
+use LangleyFoxall\XeroLaravel\XeroApp;
+use League\OAuth2\Client\Token\AccessToken;
 
 class ProcessInvoice implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    
+    private $user = null;
+    private $xero = null;
+   
 
     /**
      * Create a new job instance.
@@ -23,16 +29,22 @@ class ProcessInvoice implements ShouldQueue
     {
         //
         $this->$account = $account;
+        $user = auth()->user(); 
+
+        $xero = new XeroApp(
+            new AccessToken(json_decode($user->xero_oauth_2_access_token)),
+            $user->xero_tenant_id
+        );
     }
 
     /**
      * Execute the job.
      *
-     * @param App\Services\XeroService
+     * 
      * @return void
      */
     public function handle()
     {
-        //
+        //Send an email to each account with post paid pricing type
     }
 }
